@@ -21,6 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@apollo/gateway": "^0.45.0",
     "@nestjs/common": "^7.6.15",
     "@nestjs/core": "^7.6.15",
     "@nestjs/graphql": "^9.1.2",
@@ -32,6 +33,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "7",
+    "ts-morph": "^13.0.2",
     "typeorm": "^0.2.41"
   },
   "devDependencies": {
