@@ -109,12 +109,12 @@
     >
       <q-scroll-area class="fit">
         <q-list padding class="text-grey-8">
-          <q-item class="GNL__drawer-item" v-ripple v-for="link in menu" :key="link.text" clickable>
+          <q-item class="GNL__drawer-item" v-ripple v-for="(link, index) in menu" :to="link.to" :key="index" clickable>
             <q-item-section avatar>
               <q-icon :name="link.icon" />
             </q-item-section>
             <q-item-section>
-              <q-item-label>{{ link.text }}</q-item-label>
+              <q-item-label>{{ link.label }}</q-item-label>
             </q-item-section>
           </q-item>
         </q-list>
@@ -152,7 +152,7 @@ export default {
       byDate.value = 'Any time'
     }
 
-    function changeDate (option) {
+    function changeDate (option: any) {
       byDate.value = option
       showDateOptions.value = false
     }
@@ -173,8 +173,8 @@ export default {
       byDate,
 
       menu: [
-        { icon: 'web', label: 'Top stories' },
-        { icon: 'person', text: 'For you' },
+        { icon: 'manage_accounts', label: 'Service', to: '/service' },
+        { icon: 'person', label: 'For you', to: '/employe' },
 
       ],
       onClear,

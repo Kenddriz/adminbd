@@ -15,8 +15,8 @@ export class ServiceResolver {
     return this.serviceService.save(service);
   }
 
-  @Query(() => [Service], { name: 'service' })
-  findAll() {
+  @Query(() => [Service])
+  services() {
     return this.serviceService.findAll();
   }
 

@@ -16,8 +16,9 @@
     "@vue/apollo-composable": "^4.0.0-alpha.16",
     "@vue/apollo-option": "^4.0.0-alpha.16",
     "core-js": "^3.6.5",
-    "graphql": "^16.2.0",
-    "quasar": "^2.0.0"
+    "graphql": "^15.5.0",
+    "quasar": "^2.0.0",
+    "react": "^17.0.2"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
