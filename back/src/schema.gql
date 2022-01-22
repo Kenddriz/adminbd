@@ -2,6 +2,107 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Service {
+  id: Int!
+  intitule: String!
+  employes: [Employe!]!
+}
+
+type Employe {
+  id: Int!
+  nom: String!
+  role: Int!
+  salaire: Int!
+  service: Service!
+}
+
+type User {
+  id: Int!
+  username: String!
+  password: String!
+}
+
+type Audit {
+  id: Int!
+  quoi: String!
+  employe: Employe!
+  nouveauSalaire: Float!
+  ancienSalaire: Float!
+}
+
+type Synthese {
+  id: Int!
+  intitule: String!
+  effectif: Int!
+  somSalaire: Int!
+  nombreSalDef: Int!
+}
+
 type Query {
   getAll: String!
+  employe(id: Int!): Employe!
+  user(id: Int!): User!
+  service(id: Int!): Service!
+  audit(id: Int!): Audit!
+  synthese(id: Int!): Synthese!
+}
+
+type Mutation {
+  createEmploye(input: CreateEmployeInput!): Employe!
+  updateEmploye(updateEmployeInput: UpdateEmployeInput!): Employe!
+  removeEmploye(id: Int!): Employe!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+  createService(input: CreateServiceInput!): Service!
+  updateService(input: UpdateServiceInput!): Service!
+  removeService(id: Int!): Service!
+  removeAudit(id: Int!): Audit!
+  createSynthese(createSyntheseInput: CreateSyntheseInput!): Synthese!
+  updateSynthese(updateSyntheseInput: UpdateSyntheseInput!): Synthese!
+  removeSynthese(id: Int!): Synthese!
+}
+
+input CreateEmployeInput {
+  serviceId: Int!
+  nom: String!
+  salaire: Int!
+}
+
+input UpdateEmployeInput {
+  serviceId: Int
+  nom: String
+  salaire: Int
+  id: Int!
+}
+
+input CreateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateServiceInput {
+  intitule: String!
+}
+
+input UpdateServiceInput {
+  intitule: String
+  id: Int!
+}
+
+input CreateSyntheseInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateSyntheseInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }

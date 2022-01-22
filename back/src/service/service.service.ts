@@ -1,0 +1,34 @@
+import { Injectable } from '@nestjs/common';
+import { UpdateServiceInput } from './types/update-service.input';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Service } from './service.entity';
+
+@Injectable()
+export class ServiceService {
+  constructor(
+    @InjectRepository(Service)
+    private repository: Repository<Service>,
+  ) {}
+  async save(service: Service) {
+    return this.repository.save(service);
+  }
+
+  async findAll(): Promise<Service[]> {
+    return this.repository.find({
+      order: { intitule: 'ASC' },
+    });
+  }
+
+  async findOne(id: number): Promise<Service> {
+    return this.repository.findOne(id);
+  }
+
+  update(id: number, updateServiceInput: UpdateServiceInput) {
+    return `This action updates a #${id} service`;
+  }
+
+  remove(id: number) {
+    return `This action removes a #${id} service`;
+  }
+}
