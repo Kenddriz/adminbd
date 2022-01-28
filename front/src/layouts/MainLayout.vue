@@ -13,8 +13,7 @@
         />
 
         <q-toolbar-title v-if="$q.screen.gt.xs" shrink class="row items-center no-wrap">
-          <img src="https://cdn.quasar.dev/img/layout-gallery/logo-google.svg">
-          <span class="q-ml-sm">News</span>
+          Administrateur
         </q-toolbar-title>
 
         <q-space />
@@ -109,7 +108,14 @@
     >
       <q-scroll-area class="fit">
         <q-list padding class="text-grey-8">
-          <q-item class="GNL__drawer-item" v-ripple v-for="(link, index) in menu" :to="link.to" :key="index" clickable>
+          <q-item
+            exact
+            exact-active-class="text-primary"
+            class="GNL__drawer-item"
+            v-ripple v-for="(link, index) in menu"
+            :to="link.to" :key="index"
+            clickable
+          >
             <q-item-section avatar>
               <q-icon :name="link.icon" />
             </q-item-section>
@@ -173,9 +179,10 @@ export default {
       byDate,
 
       menu: [
-        { icon: 'manage_accounts', label: 'Service', to: '/service' },
-        { icon: 'person', label: 'For you', to: '/employe' },
-
+        { icon: 'supervisor_account', label: 'Utilisateurs', to: '/employe' },
+        { icon: 'work', label: 'Employés', to: '/service' },
+        { icon: 'view_in_ar', label: 'Synthères', to: '/employe' },
+        { icon: 'perm_contact_calendar', label: 'Audits', to: '/employe' },
       ],
       onClear,
       changeDate,
