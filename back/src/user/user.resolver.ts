@@ -1,35 +1,56 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { User } from './user.entity';
-import { CreateUserInput } from './types/create-user.input';
-import { UpdateUserInput } from './types/update-user.input';
+import { CreateUserInput, UpdateUserInput } from './types/user.input';
+import { GraphQLUpload } from 'graphql-upload';
+import { removeFile, upload } from '../utils';
+import { Upload } from 'src/shared/shared.input';
 
 @Resolver(() => User)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
-
   @Mutation(() => User)
-  createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
-    return this.userService.create(createUserInput);
+  async createUser(
+    @Args('input') input: CreateUserInput,
+    @Args({ name: 'image', type: () => GraphQLUpload, nullable: true })
+    image: Upload,
+  ): Promise<User> {
+    let user = new User();
+    Object.assign(user, input);
+    user.password = input.username;
+    if (image) {
+      const { filename } = await upload(image, '/avatars');
+      user.avatar = filename;
+    }
+    user = await this.userService.save(user);
+    return user;
   }
 
-  @Query(() => [User], { name: 'user' })
-  findAll() {
+  @Query(() => [User])
+  async users() {
     return this.userService.findAll();
   }
 
-  @Query(() => User, { name: 'user' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.userService.findOne(id);
-  }
-
   @Mutation(() => User)
-  updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-    return this.userService.update(updateUserInput.id, updateUserInput);
+  async updateUser(
+    @Args('input') input: UpdateUserInput,
+    @Args({ name: 'image', type: () => GraphQLUpload, nullable: true })
+    image: Upload,
+  ): Promise<User> {
+    const user = await this.userService.findOneById(input.id);
+    Object.assign<User, UpdateUserInput>(user, input);
+    if (image) {
+      const folder = '/avatars/' + user.id + '/';
+      if (user.avatar) removeFile(folder + user.avatar);
+      const { filename } = await upload(image, folder);
+      user.avatar = filename;
+    }
+    return this.userService.save(user);
   }
-
-  @Mutation(() => User)
-  removeUser(@Args('id', { type: () => Int }) id: number) {
-    return this.userService.remove(id);
+  @Mutation(() => Boolean)
+  async softRemoveUser(
+    @Args({ name: 'id', type: () => Int }) id: number,
+  ): Promise<boolean> {
+    return this.userService.softDelete(id);
   }
 }

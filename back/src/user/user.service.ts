@@ -1,26 +1,30 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserInput } from './types/create-user.input';
-import { UpdateUserInput } from './types/update-user.input';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './user.entity';
 
 @Injectable()
 export class UserService {
-  create(createUserInput: CreateUserInput) {
-    return 'This action adds a new user';
+  constructor(
+    @InjectRepository(User)
+    private repository: Repository<User>,
+  ) {}
+  async save(user: User): Promise<User> {
+    return this.repository.save(user);
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findOneByUsername(username: string): Promise<User> {
+    return this.repository.findOne({ username });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOneById(id: number): Promise<User> {
+    return this.repository.findOne({ id });
   }
-
-  update(id: number, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
+  async findAll(): Promise<User[]> {
+    return this.repository.find({ order: { name: 'ASC' } });
   }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async softDelete(id: number): Promise<boolean> {
+    const { affected } = await this.repository.softDelete(id);
+    return affected > 0;
   }
 }

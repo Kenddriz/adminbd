@@ -7,7 +7,7 @@ import {defineComponent} from 'vue';
 import {useServices} from '../graphql/service/services';
 
 export default defineComponent({
-  name: 'Service',
+  name: 'Synthesis',
   setup() {
     return {
       ...useServices()

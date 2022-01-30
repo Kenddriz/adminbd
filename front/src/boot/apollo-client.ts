@@ -1,11 +1,12 @@
 import { boot } from 'quasar/wrappers';
 import {
-  ApolloClient,
+  ApolloClient, ApolloLink,
   DefaultOptions,
   HttpLink,
   InMemoryCache,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { createUploadLink } from 'apollo-upload-client';
 import { onError } from '@apollo/client/link/error';
 import { Loading, Notify } from 'quasar';
 import { DefaultApolloClient } from '@vue/apollo-composable';
@@ -21,10 +22,6 @@ const authLink = setContext((_, { headers, ...context }) => {
 });
 
 const defaultOptions: DefaultOptions = {
-  watchQuery: {
-    fetchPolicy: 'cache-and-network',
-    errorPolicy: 'ignore',
-  },
   query: {
     fetchPolicy: 'cache-first',
     errorPolicy: 'all',
@@ -37,7 +34,6 @@ const defaultOptions: DefaultOptions = {
 const httpOptions = {
   uri: 'http://localhost:3000/graphql',
 };
-
 const httpLink = new HttpLink(httpOptions);
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   let error = '';
@@ -53,9 +49,14 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   Loading.hide();
 });
 
+const uploadLink = ApolloLink.split(
+  (operation) => operation.getContext().hasUpload,
+  createUploadLink(httpOptions) as never,
+  httpLink
+);
 // Create the apollo client
 const apolloClient = new ApolloClient({
-  link: errorLink.concat(authLink).concat(httpLink),
+  link:  errorLink.concat(authLink).concat(uploadLink),
   cache: new InMemoryCache({ addTypename: true }), // Cache implementation
   connectToDevTools: true,
   defaultOptions,

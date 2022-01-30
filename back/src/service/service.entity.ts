@@ -22,12 +22,4 @@ export class Service {
   @Field(() => [Employe])
   @OneToMany(() => Employe, (employe) => employe.service)
   employes: Employe[];
-
-  @Field()
-  @CreateDateColumn({ type: 'datetime', name: 'created_at' })
-  createdAt: Date;
-
-  @Field()
-  @CreateDateColumn({ type: 'datetime', name: 'updated_at' })
-  updatedAt: Date;
 }

@@ -11,6 +11,8 @@ export type Scalars = {
   Float: number;
   /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
   DateTime: any;
+  /** The `Upload` scalar type represents a file upload. */
+  Upload: any;
 };
 
 export type Audit = {
@@ -38,8 +40,8 @@ export type CreateSyntheseInput = {
 };
 
 export type CreateUserInput = {
-  /** Example field (placeholder) */
-  exampleField: Scalars['Int'];
+  name: Scalars['String'];
+  username?: Maybe<Scalars['String']>;
 };
 
 
@@ -62,7 +64,7 @@ export type Mutation = {
   removeEmploye: Employe;
   removeService: Service;
   removeSynthese: Synthese;
-  removeUser: User;
+  softRemoveUser: Scalars['Boolean'];
   updateEmploye: Employe;
   updateService: Service;
   updateSynthese: Synthese;
@@ -86,7 +88,8 @@ export type MutationCreateSyntheseArgs = {
 
 
 export type MutationCreateUserArgs = {
-  createUserInput: CreateUserInput;
+  image?: Maybe<Scalars['Upload']>;
+  input: CreateUserInput;
 };
 
 
@@ -110,7 +113,7 @@ export type MutationRemoveSyntheseArgs = {
 };
 
 
-export type MutationRemoveUserArgs = {
+export type MutationSoftRemoveUserArgs = {
   id: Scalars['Int'];
 };
 
@@ -131,7 +134,8 @@ export type MutationUpdateSyntheseArgs = {
 
 
 export type MutationUpdateUserArgs = {
-  updateUserInput: UpdateUserInput;
+  image?: Maybe<Scalars['Upload']>;
+  input: UpdateUserInput;
 };
 
 export type Query = {
@@ -140,8 +144,9 @@ export type Query = {
   employe: Employe;
   getAll: Scalars['String'];
   service: Service;
+  services: Array<Service>;
   synthese: Synthese;
-  user: User;
+  users: Array<User>;
 };
 
 
@@ -161,11 +166,6 @@ export type QueryServiceArgs = {
 
 
 export type QuerySyntheseArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type QueryUserArgs = {
   id: Scalars['Int'];
 };
 
@@ -206,14 +206,18 @@ export type UpdateSyntheseInput = {
 };
 
 export type UpdateUserInput = {
-  /** Example field (placeholder) */
-  exampleField?: Maybe<Scalars['Int']>;
   id: Scalars['Int'];
+  name: Scalars['String'];
+  username?: Maybe<Scalars['String']>;
 };
+
 
 export type User = {
   __typename?: 'User';
+  avatar: Scalars['String'];
   id: Scalars['Int'];
+  name: Scalars['String'];
   password: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
   username: Scalars['String'];
 };

@@ -179,9 +179,9 @@ export default {
       byDate,
 
       menu: [
-        { icon: 'supervisor_account', label: 'Utilisateurs', to: '/employe' },
-        { icon: 'work', label: 'Employés', to: '/service' },
-        { icon: 'view_in_ar', label: 'Synthères', to: '/employe' },
+        { icon: 'supervisor_account', label: 'Utilisateurs', to: '/users' },
+        { icon: 'work', label: 'Employés', to: '/employee' },
+        { icon: 'view_in_ar', label: 'Synthères', to: '/synthesis' },
         { icon: 'perm_contact_calendar', label: 'Audits', to: '/employe' },
       ],
       onClear,
