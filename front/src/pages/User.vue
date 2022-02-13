@@ -75,20 +75,12 @@ import UserForm from 'components/user/CreateUser.vue';
 import {useSoftRemoveUser} from 'src/graphql/users/soft.remove.user';
 import {useUpdateUser} from 'src/graphql/users/update.user';
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 31a20cb (update gestion)
 export default defineComponent({
   name: 'User',
   components: { UserForm },
   setup() {
     return {
       filter: ref(''),
-<<<<<<< HEAD
-=======
-
->>>>>>> 31a20cb (update gestion)
       ...useUsers(),
       url:(image: string) => image ? `${process.env.uri}avatars/${image}` : 'default.jpg',
       paginationLabel: (first: number, end: number, total: number) => `${first} - ${end} de ${total}`,
@@ -103,8 +95,4 @@ export default defineComponent({
 .grid-style-transition {
   transition: transform .28s, background-color .28s
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 31a20cb (update gestion)
 </style>

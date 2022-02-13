@@ -1,9 +1,9 @@
-import {CreateServiceInput, MutationCreateServiceArgs, Service} from 'src/graphql/types';
-import {gql} from '@apollo/client/core';
-import {SERVICE_FIELDS} from './service';
-import {reactive} from 'vue';
-import {useMutation} from '@vue/apollo-composable';
-import {Notify} from 'quasar';
+import { gql } from '@apollo/client';
+import { Service,CreateServiceInput, MutationCreateServiceArgs } from '../types'
+import { SERVICE_FIELDS } from './service.sdl';
+import { reactive } from 'vue';
+import { useMutation } from '@vue/apollo-composable';
+import {  Notify } from 'quasar';
 
 // Type de retour par le resolver
 type CreateServiceData = {
@@ -68,5 +68,7 @@ export const useCreateService = () => {
     void mutate({ input });
     // console.log(input);
   }
+
+
   return {input,submitCreation,loadingCreation}
 }

@@ -123,11 +123,7 @@ export default {
       byDate,
 
       menu: [
-<<<<<<< HEAD
         { icon: 'supervisor_account', label: 'Utilisateurs', to: '/users' },
-=======
-        {    icon: 'supervisor_account', label: 'Utilisateurs', to: '/users' },
->>>>>>> 31a20cb (update gestion)
         { icon: 'work', label: 'Employés', to: '/employee' },
         { icon: 'view_in_ar', label: 'Synthères', to: '/synthesis' },
         { icon: 'perm_contact_calendar', label: 'Audits', to: '/employe' },
