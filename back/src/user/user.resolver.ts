@@ -22,10 +22,6 @@ export class UserResolver {
       const { filename } = await upload(image, '/avatars');
       user.avatar = filename;
     }
-<<<<<<< HEAD
-=======
-    
->>>>>>> 31a20cb (update gestion)
     user = await this.userService.save(user);
     return user;
   }
@@ -51,10 +47,7 @@ export class UserResolver {
     }
     return this.userService.save(user);
   }
-<<<<<<< HEAD
-=======
   
->>>>>>> 31a20cb (update gestion)
   @Mutation(() => Boolean)
   async softRemoveUser(
     @Args({ name: 'id', type: () => Int }) id: number,
