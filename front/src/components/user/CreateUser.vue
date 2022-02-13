@@ -71,11 +71,5 @@ export default defineComponent({
   }
 })
 </script>
-<<<<<<< HEAD
-
 <style scoped>
-
-=======
-<style scoped>
->>>>>>> 31a20cb (update gestion)
 </style>

@@ -81,10 +81,7 @@ export type Mutation = {
   removeService: Scalars['Boolean'];
   removeSynthese: Synthese;
   softRemoveUser: Scalars['Boolean'];
-<<<<<<< HEAD
-=======
   updateCategory: Category;
->>>>>>> 31a20cb (update gestion)
   updateEmploye: Employe;
   updateService: Service;
   updateSynthese: Synthese;
@@ -182,11 +179,7 @@ export type Query = {
   getAll: Scalars['String'];
   service: Service;
   services: Array<Service>;
-<<<<<<< HEAD
-  synthese: Synthese;
-=======
   syntheses: Array<Synthese>;
->>>>>>> 31a20cb (update gestion)
   users: Array<User>;
 };
 
@@ -205,14 +198,11 @@ export type QueryFindOneCategoryArgs = {
   id: Scalars['Int'];
 };
 
-<<<<<<< HEAD
-=======
 
 export type QueryServiceArgs = {
   id: Scalars['Int'];
 };
 
->>>>>>> 31a20cb (update gestion)
 export type Service = {
   __typename?: 'Service';
   employes: Array<Employe>;
@@ -268,10 +258,7 @@ export type User = {
   id: Scalars['Int'];
   name: Scalars['String'];
   password: Scalars['String'];
-<<<<<<< HEAD
-=======
   role: Scalars['Int'];
->>>>>>> 31a20cb (update gestion)
   updatedAt: Scalars['DateTime'];
   username: Scalars['String'];
 };
