@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf" class="bg-grey-1">
-    <q-header elevated class="bg-primary text-grey-8" height-hint="64">
+    <q-header elevated class="bg-white text-grey-8" height-hint="64">
       <q-toolbar class="GNL__toolbar">
         <q-btn
           flat
@@ -44,7 +44,7 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
-       class="bg-secondary text-white"
+       class="text-white"
 
       :width="280"
     >

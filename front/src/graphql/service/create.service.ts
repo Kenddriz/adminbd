@@ -66,7 +66,6 @@ export const useCreateService = () => {
 
   function submitCreation() {
     void mutate({ input });
-    // console.log(input);
   }
 
 
