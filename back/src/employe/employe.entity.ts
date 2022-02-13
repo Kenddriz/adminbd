@@ -33,4 +33,5 @@ export class Employe {
   service: Service;
   @RelationId((employe: Employe) => employe.service)
   serviceId: number;
+
 }

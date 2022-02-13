@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, ResolveField, Root } from '@nestjs/graphql';
 import { EmployeService } from './employe.service';
 import { Employe } from './employe.entity';
 import { CreateEmployeInput } from './types/input';
@@ -23,16 +23,6 @@ export class EmployeResolver {
     return this.employeService.save(employe);
   }
 
-  @Query(() => [Employe], { name: 'employe' })
-  findAll() {
-    return this.employeService.findAll();
-  }
-
-  @Query(() => Employe, { name: 'employe' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.employeService.findOne(id);
-  }
-
   @Mutation(() => Employe)
   updateEmploye(
     @Args('updateEmployeInput') updateEmployeInput: UpdateEmployeInput,
@@ -47,4 +37,16 @@ export class EmployeResolver {
   removeEmploye(@Args('id', { type: () => Int }) id: number) {
     return this.employeService.remove(id);
   }
+
+  
+  @Query(() => [Employe])
+  employees() {
+    return this.employeService.findAll();
+  }
+  @ResolveField(() => Service)
+  service(@Root() employee: Employe) {
+    return this.serviceService.findOne(employee.serviceId)
+      ;  }
+
+
 }

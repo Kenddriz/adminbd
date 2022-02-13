@@ -55,7 +55,7 @@ type Synthese {
 
 type Query {
   getAll: String!
-  employe(id: Int!): Employe!
+  employees: [Employe!]!
   users: [User!]!
   services: [Service!]!
   service(id: Int!): Service!
