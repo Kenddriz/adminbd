@@ -68,8 +68,5 @@ export const useCreateService = () => {
     void mutate({ input });
     // console.log(input);
   }
-
-
   return {input,submitCreation,loadingCreation}
->>>>>>> 31a20cb (update gestion)
 }
