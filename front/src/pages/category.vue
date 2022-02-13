@@ -3,7 +3,7 @@
     <q-expansion-item
       expand-separator
       icon="perm_identity"
-      label="Créer un nouveau Service"
+      label="Créer un nouveau Category"
       header-class="bg-primary text-white"
       expand-icon-class="text-white"
     >
@@ -11,13 +11,13 @@
     </q-expansion-item>
     <q-table
       grid
-      title="Tous Service"
-      :rows="services"
-       :columns="columns"
+      title="Tous les Categries"
+      :rows="category"
+      :columns="columns"
       row-key="id"
       :filter="filter"
       hide-header
-      rows-per-page-label="Service par page"
+      rows-per-page-label="categorie  par page"
       :pagination-label="paginationLabel"
       :loading="loading"
     >
@@ -29,36 +29,45 @@
         </q-input>
       </template>
       <template #no-data>
-        <h4 class="text-center full-width">Aucun Service trouvé</h4>
+        <h4 class="text-center full-width">Aucun utilisateur trouvé </h4>
       </template>
       <template v-slot:item="props">
-        <q-card class="q-ma-xs col-xs-12 col-sm-6 col-md-2">
+       <q-card class="q-ma-xs col-xs-12 col-sm-6 col-md-2">
+          <!-- <img height="100" :src="url(props.row.avatar)"> -->
+       <q-separator />
+
           <q-card-section>
             <q-item>
               <q-item-section>
-                <q-item-label> Service Number {{ props.row.id }}</q-item-label>
-                <q-item-label caption>{{ props.row.intitule }}</q-item-label>
-
+                <q-item-label>{{ props.row.name }}</q-item-label>
+                <q-item-label caption>{{ props.row.slug }}</q-item-label>
               </q-item-section>
             </q-item>
           </q-card-section>
+
           <q-separator />
-          <q-card-actions align="between">
+
+               <q-card-actions align="between">
+
             <q-btn
-              @click="updateName(props.row.id, props.row.intitule)"
+               @click="updateName(props.row.id, props.row.name,props.row.slug)"
               flat
               dense
               round
               icon="edit"
             />
+
+          <!-- delete -->
+
             <q-btn
-              @click="softRemoveService(props.row.id)"
+              @click="removeCategory(props.row.id)"
               flat
               dense
               rounded
               icon="delete"
             />
           </q-card-actions>
+          <!-- delete -->
         </q-card>
       </template>
     </q-table>
@@ -67,26 +76,21 @@
 
 <script lang="ts">
 import {defineComponent, ref} from 'vue';
-import {useServices} from 'src/graphql/service/services';
-import UserForm from 'components/service/Service.vue';
-import {useSoftRemoveService} from 'src/graphql/service/soft.remove.service';
-import {useUpdateService} from 'src/graphql/service/update.service';
-
+ import {useCategory} from 'src/graphql/category/category';
+import UserForm from 'components/category/CreateCategory.vue';
+import {useRemoveCategory} from 'src/graphql/category/remove.category';
+import {useUpdateCategory} from 'src/graphql/category/update.category';
 
 export default defineComponent({
-<<<<<<< HEAD:front/src/pages/Synthesis.vue
-  name: 'Synthesis',
-=======
-  name: 'User',
+  name: 'Category',
   components: { UserForm },
->>>>>>> 31a20cb (update gestion):front/src/pages/Service.vue
   setup() {
     return {
       filter: ref(''),
-      ...useServices(),
-       ...useUpdateService(),
-       ...useSoftRemoveService(),
       paginationLabel: (first: number, end: number, total: number) => `${first} - ${end} de ${total}`,
+      ...useRemoveCategory(),
+      ...useUpdateCategory(),
+     ...useCategory(),
     }
   }
 })

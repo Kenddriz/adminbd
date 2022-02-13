@@ -1,27 +1,29 @@
 import {gql} from '@apollo/client';
 import {useMutation} from '@vue/apollo-composable';
-import {MutationSoftRemoveUserArgs} from 'src/graphql/types';
+import {MutationRemoveServiceArgs} from 'src/graphql/types';
 import {Notify} from 'quasar';
 import { Dialog } from 'quasar';
 
-type SoftRemoveUserData = {
-  softRemoveUser: boolean;
+
+
+type SoftRemoveServiceData = {
+  removeService: boolean;
 }
 
 const SOFT_REMOVE = gql`
-    mutation SoftRemoveUser($id: Int!){
-      softRemoveUser(id: $id)
+    mutation RemoveService($id: Int!){
+      removeService(id: $id)
     }
 `;
-export const useSoftRemoveUser = () => {
+export const useSoftRemoveService = () => {
   const { loading, onDone, mutate } = useMutation<
-    SoftRemoveUserData,
-    MutationSoftRemoveUserArgs
+  SoftRemoveServiceData,
+    MutationRemoveServiceArgs
     >(SOFT_REMOVE);
   onDone(({ data }) => {
-    if(data?.softRemoveUser) {
+    if(data?.removeService) {
       Notify.create({
-        message: 'Utilisateur supprimée avec succès',
+        message: 'Service supprimée avec succès',
         color: 'positive',
       })
     } else {
@@ -31,22 +33,24 @@ export const useSoftRemoveUser = () => {
       })
     }
   })
-  function softRemoveUser(id: number) {
 
+
+  function softRemoveService(id: number) {
     Dialog.create({
-
-      message: 'Etes-vous sûr de vouloir supprimer cet utilisateur ?',
+      message: 'Etes-vous sûr de vouloir supprimer cet Service ?',
       cancel: 'Annuler',
       ok: 'Confirmer',
       title: 'Suppression',
       dark: true,
     }).onOk(() => {
+
       void mutate({ id }, {
+
         update: (cache, { data }) => {
-          if(data?.softRemoveUser) {
+          if(data?.removeService) {
             cache.modify({
               fields: {
-                users(existingRef: any[], { readField }) {
+                services(existingRef: any[], { readField }) {
                   return existingRef.filter(ref => readField('id', ref) !== id);
                 }
               }
@@ -56,5 +60,5 @@ export const useSoftRemoveUser = () => {
       })
     });
   }
-  return { softRemoveUser, loading }
+  return { softRemoveService, loading }
 }

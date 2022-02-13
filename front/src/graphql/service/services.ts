@@ -1,6 +1,6 @@
 import {Service} from 'src/graphql/types';
 import {gql} from '@apollo/client';
-import {SERVICE_FIELDS} from 'src/graphql/service/service';
+import {SERVICE_FIELDS} from 'src/graphql/service/service.sdl';
 import {useQuery, useResult} from '@vue/apollo-composable';
 
 type ServicesData = {

@@ -6,21 +6,18 @@ import { UpdateSyntheseInput } from './types/update-synthese.input';
 
 @Resolver(() => Synthese)
 export class SyntheseResolver {
-  constructor(private readonly syntheseService: SyntheseService) {}
+  constructor(private  syntheseService: SyntheseService) {}
 
   @Mutation(() => Synthese)
-  createSynthese(@Args('createSyntheseInput') createSyntheseInput: CreateSyntheseInput) {
-    return this.syntheseService.create(createSyntheseInput);
+  async createSynthese(@Args('input') input: CreateSyntheseInput) {
+    const synthese = new Synthese();
+    Object.assign(synthese, input);
+    return this.syntheseService.save(synthese);
   }
 
-  @Query(() => [Synthese], { name: 'synthese' })
-  findAll() {
+  @Query(() => [Synthese])
+  syntheses() {
     return this.syntheseService.findAll();
-  }
-
-  @Query(() => Synthese, { name: 'synthese' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.syntheseService.findOne(id);
   }
 
   @Mutation(() => Synthese)

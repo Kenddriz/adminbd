@@ -24,6 +24,18 @@ export type Audit = {
   quoi: Scalars['String'];
 };
 
+export type Category = {
+  __typename?: 'Category';
+  id: Scalars['Int'];
+  name: Scalars['String'];
+  slug: Scalars['String'];
+};
+
+export type CreateCategoryInput = {
+  name: Scalars['String'];
+  slug: Scalars['String'];
+};
+
 export type CreateEmployeInput = {
   nom: Scalars['String'];
   salaire: Scalars['Int'];
@@ -35,8 +47,10 @@ export type CreateServiceInput = {
 };
 
 export type CreateSyntheseInput = {
-  /** Example field (placeholder) */
-  exampleField: Scalars['Int'];
+  effectif: Scalars['Int'];
+  intitule: Scalars['String'];
+  nombreSalDef: Scalars['Int'];
+  somSalaire: Scalars['Int'];
 };
 
 export type CreateUserInput = {
@@ -56,19 +70,30 @@ export type Employe = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createCategory: Category;
   createEmploye: Employe;
   createService: Service;
   createSynthese: Synthese;
   createUser: User;
   removeAudit: Audit;
+  removeCategory: Category;
   removeEmploye: Employe;
-  removeService: Service;
+  removeService: Scalars['Boolean'];
   removeSynthese: Synthese;
   softRemoveUser: Scalars['Boolean'];
+<<<<<<< HEAD
+=======
+  updateCategory: Category;
+>>>>>>> 31a20cb (update gestion)
   updateEmploye: Employe;
   updateService: Service;
   updateSynthese: Synthese;
   updateUser: User;
+};
+
+
+export type MutationCreateCategoryArgs = {
+  input: CreateCategoryInput;
 };
 
 
@@ -83,7 +108,7 @@ export type MutationCreateServiceArgs = {
 
 
 export type MutationCreateSyntheseArgs = {
-  createSyntheseInput: CreateSyntheseInput;
+  input: CreateSyntheseInput;
 };
 
 
@@ -94,6 +119,11 @@ export type MutationCreateUserArgs = {
 
 
 export type MutationRemoveAuditArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type MutationRemoveCategoryArgs = {
   id: Scalars['Int'];
 };
 
@@ -115,6 +145,11 @@ export type MutationRemoveSyntheseArgs = {
 
 export type MutationSoftRemoveUserArgs = {
   id: Scalars['Int'];
+};
+
+
+export type MutationUpdateCategoryArgs = {
+  input: UpdateCategoryInput;
 };
 
 
@@ -141,11 +176,17 @@ export type MutationUpdateUserArgs = {
 export type Query = {
   __typename?: 'Query';
   audit: Audit;
+  categories: Array<Category>;
   employe: Employe;
+  findOneCategory: Category;
   getAll: Scalars['String'];
   service: Service;
   services: Array<Service>;
+<<<<<<< HEAD
   synthese: Synthese;
+=======
+  syntheses: Array<Synthese>;
+>>>>>>> 31a20cb (update gestion)
   users: Array<User>;
 };
 
@@ -160,22 +201,23 @@ export type QueryEmployeArgs = {
 };
 
 
+export type QueryFindOneCategoryArgs = {
+  id: Scalars['Int'];
+};
+
+<<<<<<< HEAD
+=======
+
 export type QueryServiceArgs = {
   id: Scalars['Int'];
 };
 
-
-export type QuerySyntheseArgs = {
-  id: Scalars['Int'];
-};
-
+>>>>>>> 31a20cb (update gestion)
 export type Service = {
   __typename?: 'Service';
-  createdAt: Scalars['DateTime'];
   employes: Array<Employe>;
   id: Scalars['Int'];
   intitule: Scalars['String'];
-  updatedAt: Scalars['DateTime'];
 };
 
 export type Synthese = {
@@ -185,6 +227,12 @@ export type Synthese = {
   intitule: Scalars['String'];
   nombreSalDef: Scalars['Int'];
   somSalaire: Scalars['Int'];
+};
+
+export type UpdateCategoryInput = {
+  id: Scalars['Int'];
+  name?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
 };
 
 export type UpdateEmployeInput = {
@@ -200,9 +248,11 @@ export type UpdateServiceInput = {
 };
 
 export type UpdateSyntheseInput = {
-  /** Example field (placeholder) */
-  exampleField?: Maybe<Scalars['Int']>;
+  effectif?: Maybe<Scalars['Int']>;
   id: Scalars['Int'];
+  intitule?: Maybe<Scalars['String']>;
+  nombreSalDef?: Maybe<Scalars['Int']>;
+  somSalaire?: Maybe<Scalars['Int']>;
 };
 
 export type UpdateUserInput = {
@@ -218,6 +268,10 @@ export type User = {
   id: Scalars['Int'];
   name: Scalars['String'];
   password: Scalars['String'];
+<<<<<<< HEAD
+=======
+  role: Scalars['Int'];
+>>>>>>> 31a20cb (update gestion)
   updatedAt: Scalars['DateTime'];
   username: Scalars['String'];
 };

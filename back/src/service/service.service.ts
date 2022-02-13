@@ -28,7 +28,9 @@ export class ServiceService {
     return `This action updates a #${id} service`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} service`;
+  async remove(id: number): Promise<boolean> {
+    const { affected } = await this.repository.softDelete(id);
+    return affected > 0;
   }
+
 }

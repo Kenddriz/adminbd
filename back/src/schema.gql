@@ -31,6 +31,17 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Category {
+  id: Int!
+  name: String!
+  slug: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Audit {
   id: Int!
   quoi: String!
@@ -53,8 +64,10 @@ type Query {
   users: [User!]!
   services: [Service!]!
   service(id: Int!): Service!
+  categories: [Category!]!
+  findOneCategory(id: Int!): Category!
   audit(id: Int!): Audit!
-  synthese(id: Int!): Synthese!
+  syntheses: [Synthese!]!
 }
 
 type Mutation {
@@ -66,9 +79,12 @@ type Mutation {
   softRemoveUser(id: Int!): Boolean!
   createService(input: CreateServiceInput!): Service!
   updateService(input: UpdateServiceInput!): Service!
-  removeService(id: Int!): Service!
+  removeService(id: Int!): Boolean!
+  createCategory(input: CreateCategoryInput!): Category!
+  updateCategory(input: UpdateCategoryInput!): Category!
+  removeCategory(id: Int!): Category!
   removeAudit(id: Int!): Audit!
-  createSynthese(createSyntheseInput: CreateSyntheseInput!): Synthese!
+  createSynthese(input: CreateSyntheseInput!): Synthese!
   updateSynthese(updateSyntheseInput: UpdateSyntheseInput!): Synthese!
   removeSynthese(id: Int!): Synthese!
 }
@@ -109,13 +125,28 @@ input UpdateServiceInput {
   id: Int!
 }
 
+input CreateCategoryInput {
+  name: String!
+  slug: String!
+}
+
+input UpdateCategoryInput {
+  name: String
+  slug: String
+  id: Int!
+}
+
 input CreateSyntheseInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  intitule: String!
+  effectif: Int!
+  somSalaire: Int!
+  nombreSalDef: Int!
 }
 
 input UpdateSyntheseInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  intitule: String
+  effectif: Int
+  somSalaire: Int
+  nombreSalDef: Int
   id: Int!
 }

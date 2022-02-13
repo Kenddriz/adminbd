@@ -1,37 +1,21 @@
 <template>
-  <q-form @submit="createUser" @reset="reset">
+  <q-form @submit="createCategory" @reset="reset">
     <q-card flat bordered>
       <q-card-section :horizontal="$q.screen.gt.sm">
         <q-card-section class="q-pt-xs col-7">
           <q-input
             dense
             v-model="input.name"
-            label="Nom complet *"
+            label="Nom de la categorie *"
             :lazy-rules="true"
-            :rules="[ val => val && val.length > 0 || 'Entrer le nom d\'utilisateur']"
+            :rules="[ val => val && val.length > 0 || 'Entrer le nom de la categorie']"
           />
           <q-input
             dense
-            v-model="input.username"
-            label="Nom d'utilisateur *"
+            v-model="input.slug"
+            label="Slug *"
             :lazy-rules="true"
-            :rules="[ val => val && val.length > 0 || 'Entrer le pseudonyme d\'utilisateur']"
-          />
-        </q-card-section>
-
-        <q-card-section horizontal class="col-5">
-          <q-uploader
-            url="default.jpg"
-            color="teal"
-            class="col"
-            flat
-            bordered
-            style="height: 160px"
-            hide-upload-btn
-            :multiple="false"
-            accept="image/*"
-            @added="setImage($event[0])"
-            @removed="image = null"
+            :rules="[ val => val && val.length > 0 || 'Entrer le slug de la categorie']"
           />
         </q-card-section>
       </q-card-section>
@@ -46,6 +30,7 @@
           icon="save"
           color="primary"
         />
+
         <q-btn
           no-caps
           glossy
@@ -60,22 +45,18 @@
 
 <script lang="ts">
 import {defineComponent } from 'vue';
-import {useCreateUser} from 'src/graphql/users/create.user';
+import {useCreateCategory} from 'src/graphql/category/create.category';
 
 export default defineComponent({
   name: 'UserForm',
   setup() {
     return {
-      ...useCreateUser(),
+      ...useCreateCategory(),
     }
   }
 })
 </script>
-<<<<<<< HEAD
 
 <style scoped>
 
-=======
-<style scoped>
->>>>>>> 31a20cb (update gestion)
 </style>

@@ -41,10 +41,7 @@ export const useUpdateUser = () => {
       image: image.value,
     });
   }
-<<<<<<< HEAD
-=======
 
->>>>>>> 31a20cb (update gestion)
   function updateName(id: number, name: string) {
     Dialog.create({
       cancel: 'Annuler',
@@ -67,10 +64,7 @@ export const useUpdateUser = () => {
       }
     });
   }
-<<<<<<< HEAD
-=======
 
->>>>>>> 31a20cb (update gestion)
   return {
     loading,
     updateUser,

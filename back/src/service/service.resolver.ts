@@ -13,6 +13,7 @@ export class ServiceResolver {
     const service = new Service();
     Object.assign(service, input);
     return this.serviceService.save(service);
+    
   }
 
   @Query(() => [Service])
@@ -33,8 +34,16 @@ export class ServiceResolver {
     return this.serviceService.save(service);
   }
 
-  @Mutation(() => Service)
-  removeService(@Args('id', { type: () => Int }) id: number) {
+  
+  // @Mutation(() => Service)
+  // removeService(@Args('id', { type: () => Int }) id: number) {
+  //   return this.serviceService.remove(id);
+  // }
+
+  @Mutation(() => Boolean)
+  async removeService(
+    @Args({ name: 'id', type: () => Int }) id: number,
+  ): Promise<boolean> {
     return this.serviceService.remove(id);
   }
 }

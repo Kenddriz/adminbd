@@ -8,4 +8,5 @@ import { Synthese } from './synthese.entity';
   imports: [TypeOrmModule.forFeature([Synthese])],
   providers: [SyntheseResolver, SyntheseService],
 })
+  
 export class SyntheseModule {}

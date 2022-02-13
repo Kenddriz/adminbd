@@ -1,37 +1,35 @@
 <template>
-  <q-form @submit="createUser" @reset="reset">
+  <q-form @submit="createSynthese" @reset="reset">
     <q-card flat bordered>
       <q-card-section :horizontal="$q.screen.gt.sm">
         <q-card-section class="q-pt-xs col-7">
           <q-input
             dense
-            v-model="input.name"
-            label="Nom complet *"
+            v-model="input.intitule"
+            label="intitule *"
             :lazy-rules="true"
-            :rules="[ val => val && val.length > 0 || 'Entrer le nom d\'utilisateur']"
+            :rules="[ val => val && val.length || 'Entrer le nom de l\'intitule']"
           />
           <q-input
             dense
-            v-model="input.username"
-            label="Nom d'utilisateur *"
+            v-model.number="input.effectif"
+            label="Effectif *"
             :lazy-rules="true"
-            :rules="[ val => val && val.length > 0 || 'Entrer le pseudonyme d\'utilisateur']"
+            :rules="[ val => val || 'Entrer l\'effectif']"
           />
-        </q-card-section>
-
-        <q-card-section horizontal class="col-5">
-          <q-uploader
-            url="default.jpg"
-            color="teal"
-            class="col"
-            flat
-            bordered
-            style="height: 160px"
-            hide-upload-btn
-            :multiple="false"
-            accept="image/*"
-            @added="setImage($event[0])"
-            @removed="image = null"
+            <q-input
+            dense
+            v-model.number="input.somSalaire"
+            label="Somme  salaire *"
+            :lazy-rules="true"
+            :rules="[ val => val || 'Entrer la somme de  salaire']"
+          />
+             <q-input
+            dense
+            v-model.number="input.nombreSalDef"
+            label="nombre de salaire *"
+            :lazy-rules="true"
+            :rules="[ val => val || 'Entrer le nombre de salaire']"
           />
         </q-card-section>
       </q-card-section>
@@ -60,22 +58,16 @@
 
 <script lang="ts">
 import {defineComponent } from 'vue';
-import {useCreateUser} from 'src/graphql/users/create.user';
+import {useCreateSynthese} from 'src/graphql/Synthese/create.synthese';
 
 export default defineComponent({
-  name: 'UserForm',
+  name: 'SyntheseForm',
   setup() {
     return {
-      ...useCreateUser(),
+      ...useCreateSynthese(),
     }
   }
 })
 </script>
-<<<<<<< HEAD
-
 <style scoped>
-
-=======
-<style scoped>
->>>>>>> 31a20cb (update gestion)
 </style>

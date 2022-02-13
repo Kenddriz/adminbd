@@ -1,27 +1,27 @@
 import {gql} from '@apollo/client';
 import {useMutation} from '@vue/apollo-composable';
-import {MutationSoftRemoveUserArgs} from 'src/graphql/types';
+import {MutationRemoveCategoryArgs} from 'src/graphql/types';
 import {Notify} from 'quasar';
 import { Dialog } from 'quasar';
 
-type SoftRemoveUserData = {
-  softRemoveUser: boolean;
+type RemoveCategoryData = {
+  removeCategory: boolean;
 }
 
 const SOFT_REMOVE = gql`
-    mutation SoftRemoveUser($id: Int!){
-      softRemoveUser(id: $id)
+    mutation RemoveCategory($id: Int!){
+      removeCategory(id: $id)
     }
 `;
-export const useSoftRemoveUser = () => {
+export const useRemoveCategory = () => {
   const { loading, onDone, mutate } = useMutation<
-    SoftRemoveUserData,
-    MutationSoftRemoveUserArgs
+  RemoveCategoryData,
+  MutationRemoveCategoryArgs
     >(SOFT_REMOVE);
   onDone(({ data }) => {
-    if(data?.softRemoveUser) {
+    if(data?.removeCategory) {
       Notify.create({
-        message: 'Utilisateur supprimée avec succès',
+        message: 'Category  supprimée avec succès',
         color: 'positive',
       })
     } else {
@@ -31,10 +31,9 @@ export const useSoftRemoveUser = () => {
       })
     }
   })
-  function softRemoveUser(id: number) {
 
+  function removeCategory(id: number) {
     Dialog.create({
-
       message: 'Etes-vous sûr de vouloir supprimer cet utilisateur ?',
       cancel: 'Annuler',
       ok: 'Confirmer',
@@ -43,10 +42,10 @@ export const useSoftRemoveUser = () => {
     }).onOk(() => {
       void mutate({ id }, {
         update: (cache, { data }) => {
-          if(data?.softRemoveUser) {
+          if(data?.removeCategory) {
             cache.modify({
               fields: {
-                users(existingRef: any[], { readField }) {
+                category(existingRef: any[], { readField }) {
                   return existingRef.filter(ref => readField('id', ref) !== id);
                 }
               }
@@ -56,5 +55,5 @@ export const useSoftRemoveUser = () => {
       })
     });
   }
-  return { softRemoveUser, loading }
+  return { removeCategory, loading }
 }

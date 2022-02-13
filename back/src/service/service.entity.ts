@@ -1,11 +1,15 @@
+import { Delete } from '@nestjs/common';
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
 import { Employe } from '../employe/employe.entity';
 
 @ObjectType()
@@ -19,7 +23,11 @@ export class Service {
   @Column({ type: 'varchar' })
   intitule: string;
 
+  @DeleteDateColumn({name: 'deleted_at'})
+  deletedAt: Date;
+
   @Field(() => [Employe])
   @OneToMany(() => Employe, (employe) => employe.service)
   employes: Employe[];
+  
 }
