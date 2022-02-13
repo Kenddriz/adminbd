@@ -10,13 +10,16 @@ export class EmployeService {
   constructor(
     @InjectRepository(Employe)
     private repository: Repository<Employe>,
-  ) {}
+  ) { }
+  
   async save(employe: Employe) {
     return this.repository.save(employe);
   }
 
-  findAll() {
-    return `This action returns all employe`;
+  async findAll(): Promise<Employe[]> {
+    return this.repository.find({
+      order: {nom:'ASC', role: 'ASC',salaire:'ASC'},
+    });
   }
 
   findOne(id: number) {
