@@ -9,7 +9,6 @@ const routes: RouteRecordRaw[] = [
       { path: 'users', component: () => import('pages/User.vue') },
       { path: 'synthesis', component: () => import('pages/Synthesis.vue') },
       { path: 'services', component: () => import('pages/Service.vue') },
-
     ],
   },
   // Always leave this as last one,
@@ -18,6 +17,7 @@ const routes: RouteRecordRaw[] = [
     path: '/:catchAll(.*)*',
     component: () => import('pages/Error404.vue'),
   },
+
 ];
 
 export default routes;

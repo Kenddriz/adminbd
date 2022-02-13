@@ -33,4 +33,8 @@ export class EmployeService {
   remove(id: number) {
     return `This action removes a #${id} employe`;
   }
+
+  findEmployesByService(serviceId: number) {
+    return this.repository.createQueryBuilder().where('service_id=:serviceId', { serviceId }).getMany();
+  }
 }

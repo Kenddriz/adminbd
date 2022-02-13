@@ -8,7 +8,6 @@ import { AppResolver } from './app.resolver';
 import { EmployeModule } from './employe/employe.module';
 import { UserModule } from './user/user.module';
 import { ServiceModule } from './service/service.module';
-import { CategoryModule } from './category/category.module';
 import { AuditModule } from './audit/audit.module';
 import { SyntheseModule } from './synthese/synthese.module';
 import { connexionOptions } from './configuration/connexionLoader';
@@ -29,7 +28,6 @@ import { connexionOptions } from './configuration/connexionLoader';
     EmployeModule,
     UserModule,
     ServiceModule,
-    CategoryModule,
     AuditModule,
     SyntheseModule,
   ],

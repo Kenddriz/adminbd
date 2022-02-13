@@ -127,6 +127,7 @@ export default {
         { icon: 'work', label: 'Employés', to: '/employee' },
         { icon: 'view_in_ar', label: 'Synthères', to: '/synthesis' },
         { icon: 'perm_contact_calendar', label: 'Audits', to: '/employe' },
+         { icon: 'home_repair_service', label: 'Services', to: '/services' },
       ],
       onClear,
       changeDate,
