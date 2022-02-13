@@ -1,14 +1,15 @@
 <template>
   <q-table
     title="Treats"
-    :rows="[]"
-    :columns="[]"
+    :rows="employees"
+    :columns="columns"
     row-key="name"
     selection="single"
     :filter="filter"
     class="q-ma-md"
     square
     no-data-label="Aucun employé trouvé"
+    :rows-per-page-options="[10,20,30,40,50,60]"
   >
     <template v-slot:top-left>
       <Service />
@@ -26,6 +27,8 @@
 <script lang="ts">
 import {defineComponent, ref} from 'vue';
 import Service from 'components/service/Service.vue';
+import {useEmployees} from 'src/graphql/employee/employees';
+import {columns} from 'src/graphql/employee/employee';
 
 export default defineComponent({
   name: 'Employee',
@@ -33,6 +36,8 @@ export default defineComponent({
   setup() {
     return {
       filter: ref(''),
+      ...useEmployees(),
+      columns,
     }
   }
 })

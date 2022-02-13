@@ -174,7 +174,7 @@ export type Query = {
   __typename?: 'Query';
   audit: Audit;
   categories: Array<Category>;
-  employe: Employe;
+  employees: Array<Employe>;
   findOneCategory: Category;
   getAll: Scalars['String'];
   service: Service;
@@ -185,11 +185,6 @@ export type Query = {
 
 
 export type QueryAuditArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type QueryEmployeArgs = {
   id: Scalars['Int'];
 };
 
