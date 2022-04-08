@@ -2,8 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Service } from './service.entity';
-import { ResolveField } from '@nestjs/graphql';
-import { Employe } from '../employe/employe.entity';
 
 @Injectable()
 export class ServiceService {
@@ -29,7 +27,4 @@ export class ServiceService {
     const { affected } = await this.repository.softDelete(id);
     return affected > 0;
   }
-
- 
-
 }

@@ -42,7 +42,7 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue';
 import { useCreateService } from 'src/graphql/service/create.service';
-import {useUpdateService} from "src/graphql/service/update.service";
+import {useUpdateService} from 'src/graphql/service/update.service';
 
 export default defineComponent({
   props: ['services', 'loading'],
