@@ -30,4 +30,8 @@ export class EmployeService {
     const { affected } = await this.repository.delete(id);
     return affected > 0;
   }
+
+  findEmployesByService(serviceId: number) {
+    return this.repository.createQueryBuilder().where('service_id=:serviceId', { serviceId }).getMany();
+  }
 }
