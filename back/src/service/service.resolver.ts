@@ -1,8 +1,7 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { ServiceService } from './service.service';
 import { Service } from './service.entity';
-import { CreateServiceInput } from './types/input';
-import { UpdateServiceInput } from './types/update-service.input';
+import { CreateServiceInput, UpdateServiceInput } from './types/input';
 
 @Resolver(() => Service)
 export class ServiceResolver {
@@ -13,17 +12,11 @@ export class ServiceResolver {
     const service = new Service();
     Object.assign(service, input);
     return this.serviceService.save(service);
-    
   }
 
   @Query(() => [Service])
   services() {
     return this.serviceService.findAll();
-  }
-
-  @Query(() => Service, { name: 'service' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.serviceService.findOne(id);
   }
 
   @Mutation(() => Service)
@@ -33,12 +26,6 @@ export class ServiceResolver {
     Object.assign(service, res);
     return this.serviceService.save(service);
   }
-
-  
-  // @Mutation(() => Service)
-  // removeService(@Args('id', { type: () => Int }) id: number) {
-  //   return this.serviceService.remove(id);
-  // }
 
   @Mutation(() => Boolean)
   async removeService(

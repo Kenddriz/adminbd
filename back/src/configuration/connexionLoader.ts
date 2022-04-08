@@ -14,7 +14,7 @@ export const connexionOptions = async () => {
         '',
       )}`,
     ],
-    synchronize: process.env.NODE_ENV === 'development',
+    synchronize: false,
     migrations: [],
   });
 };

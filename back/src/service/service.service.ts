@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { UpdateServiceInput } from './types/update-service.input';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Service } from './service.entity';
@@ -22,10 +21,6 @@ export class ServiceService {
 
   async findOne(id: number): Promise<Service> {
     return this.repository.findOne(id);
-  }
-
-  update(id: number, updateServiceInput: UpdateServiceInput) {
-    return `This action updates a #${id} service`;
   }
 
   async remove(id: number): Promise<boolean> {

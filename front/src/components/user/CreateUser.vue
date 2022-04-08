@@ -22,7 +22,6 @@
         <q-card-section horizontal class="col-5">
           <q-uploader
             url="default.jpg"
-            color="teal"
             class="col"
             flat
             bordered
@@ -48,7 +47,6 @@
         />
         <q-btn
           no-caps
-          glossy
           label="Rénitialiser"
           type="reset"
           color="primary"

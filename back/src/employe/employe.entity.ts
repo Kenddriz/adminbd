@@ -4,7 +4,8 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  PrimaryGeneratedColumn, RelationId,
+  PrimaryGeneratedColumn,
+  RelationId,
 } from 'typeorm';
 import { Service } from '../service/service.entity';
 
@@ -20,8 +21,8 @@ export class Employe {
   nom: string;
 
   @Field(() => Int)
-  @Column({ type: 'tinyint', width: 1 })
-  role: string;
+  @Column({ type: 'tinyint', width: 1, default: 0 })
+  role: number;
 
   @Field(() => Int)
   @Column({ type: 'int' })
@@ -33,5 +34,4 @@ export class Employe {
   service: Service;
   @RelationId((employe: Employe) => employe.service)
   serviceId: number;
-
 }

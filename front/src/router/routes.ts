@@ -5,11 +5,10 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', alias: 'employee', component: () => import('pages/Employee.vue') },
-      { path: 'users', component: () => import('pages/User.vue') },
-      { path: 'synthesis', component: () => import('pages/Synthesis.vue') },
-      { path: 'services', component: () => import('pages/Service.vue') },
-
+      { path: '', alias: 'employee', name: '0', component: () => import('pages/Employee.vue') },
+      { path: 'users', name: '1', component: () => import('pages/User.vue') },
+      { path: 'synthesis', name: '2', component: () => import('pages/Synthesis.vue') },
+      { path: 'audits', name: '3',component: () => import('pages/Audit.vue') },
     ],
   },
   // Always leave this as last one,

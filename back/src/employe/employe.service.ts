@@ -10,27 +10,24 @@ export class EmployeService {
   constructor(
     @InjectRepository(Employe)
     private repository: Repository<Employe>,
-  ) { }
-  
+  ) {}
+
   async save(employe: Employe) {
     return this.repository.save(employe);
   }
 
   async findAll(): Promise<Employe[]> {
     return this.repository.find({
-      order: {nom:'ASC', role: 'ASC',salaire:'ASC'},
+      order: { nom: 'ASC', role: 'ASC', salaire: 'ASC' },
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} employe`;
+  async findOne(id: number) {
+    return this.repository.findOne(id);
   }
 
-  update(id: number, updateEmployeInput: UpdateEmployeInput) {
-    return `This action updates a #${id} employe`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} employe`;
+  async remove(id: number): Promise<boolean> {
+    const { affected } = await this.repository.delete(id);
+    return affected > 0;
   }
 }

@@ -1,16 +1,8 @@
 import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  RelationId,
-} from 'typeorm';
-import { Employe } from '../employe/employe.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
-@Entity({ name: 'audits' })
+@Entity({ name: 'audit_employe' })
 export class Audit {
   @Field(() => Int)
   @PrimaryGeneratedColumn('increment', { unsigned: true, type: 'int' })
@@ -18,14 +10,15 @@ export class Audit {
 
   @Field(() => String)
   @Column({ type: 'varchar' })
+  qui: string;
+
+  @Field(() => String)
+  @Column({ type: 'varchar', name: 'quoi' })
   quoi: string;
 
-  @Field(() => Employe)
-  @ManyToOne(() => Employe)
-  @JoinColumn({ name: 'employe_id' })
-  employe: Employe;
-  @RelationId((audit: Audit) => audit.employe)
-  employeId: number;
+  @Field()
+  @Column({ type: 'timestamp' })
+  quand: Date;
 
   @Field(() => Float)
   @Column({ type: 'float', name: 'nouveau_salaire' })

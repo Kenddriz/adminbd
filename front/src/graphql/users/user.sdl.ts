@@ -3,5 +3,4 @@ export const USER_FIELDS = `
     name
     username
     avatar
-    role
 `;

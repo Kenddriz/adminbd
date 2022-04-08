@@ -4,8 +4,6 @@
       expand-separator
       icon="perm_identity"
       label="Créer un nouveau utilisateur"
-      header-class="bg-primary text-white"
-      expand-icon-class="text-white"
     >
       <UserForm />
     </q-expansion-item>

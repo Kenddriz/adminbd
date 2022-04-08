@@ -17,27 +17,8 @@
         </q-toolbar-title>
 
         <q-space />
-        {{services.map(x => x.intitule).join('-')}}
+        {{menu[$route.name].label}}
         <q-space />
-
-
-        <div class="q-gutter-sm row items-center no-wrap">
-          <q-btn v-if="$q.screen.gt.sm" round dense flat color="text-grey-7" icon="apps">
-            <q-tooltip>Google Apps</q-tooltip>
-          </q-btn>
-          <q-btn round dense flat color="grey-8" icon="notifications">
-            <q-badge color="red" text-color="white" floating>
-              2
-            </q-badge>
-            <q-tooltip>Notifications</q-tooltip>
-          </q-btn>
-          <q-btn round flat>
-            <q-avatar size="26px">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png">
-            </q-avatar>
-            <q-tooltip>Account</q-tooltip>
-          </q-btn>
-        </div>
       </q-toolbar>
     </q-header>
     <q-drawer
@@ -52,7 +33,7 @@
         <q-list padding class="text-white-8">
           <q-item
             exact
-            exact-active-class="text-white"
+            exact-active-class="text-primary"
             class="GNL__drawer-item"
             v-ripple v-for="(link, index) in menu"
             :to="link.to" :key="index"
@@ -85,26 +66,6 @@ export default {
   setup () {
     const leftDrawerOpen = ref(false)
     const search = ref('')
-    const showAdvanced = ref(false)
-    const showDateOptions = ref(false)
-    const exactPhrase = ref('')
-    const hasWords = ref('')
-    const excludeWords = ref('')
-    const byWebsite = ref('')
-    const byDate = ref('Any time')
-
-    function onClear () {
-      exactPhrase.value = ''
-      hasWords.value = ''
-      excludeWords.value = ''
-      byWebsite.value = ''
-      byDate.value = 'Any time'
-    }
-
-    function changeDate (option: any) {
-      byDate.value = option
-      showDateOptions.value = false
-    }
 
     function toggleLeftDrawer () {
       leftDrawerOpen.value = !leftDrawerOpen.value
@@ -114,22 +75,12 @@ export default {
       ...useServices(),
       leftDrawerOpen,
       search,
-      showAdvanced,
-      showDateOptions,
-      exactPhrase,
-      hasWords,
-      excludeWords,
-      byWebsite,
-      byDate,
-
       menu: [
         { icon: 'supervisor_account', label: 'Utilisateurs', to: '/users' },
         { icon: 'work', label: 'Employés', to: '/employee' },
-        { icon: 'view_in_ar', label: 'Synthères', to: '/synthesis' },
-        { icon: 'perm_contact_calendar', label: 'Audits', to: '/employe' },
+        { icon: 'view_in_ar', label: 'Synthèses', to: '/synthesis' },
+        { icon: 'perm_contact_calendar', label: 'Audits', to: '/audits' },
       ],
-      onClear,
-      changeDate,
       toggleLeftDrawer
     }
   }

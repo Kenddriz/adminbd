@@ -1,6 +1,6 @@
 import { useMutation } from '@vue/apollo-composable';
 import { gql } from '@apollo/client/core';
-import {MutationUpdateServiceArgs, UpdateServiceInput, Service} from 'src/graphql/types';
+import {MutationUpdateServiceArgs, Service} from 'src/graphql/types';
 import {SERVICE_FIELDS} from 'src/graphql/service/service.sdl';
 import {Dialog, Notify} from 'quasar';
 
@@ -24,7 +24,7 @@ const UPDATE_SERVICE = gql`
 export const useUpdateService = () => {
 // Modify data with the useMutation
 // Pass mutation to useMutation
-  const { loading, mutate, onDone } = useMutation<
+  const { loading: loadingUpdate, mutate, onDone } = useMutation<
   UpdateServiceData,
     MutationUpdateServiceArgs
     // mutation IncrementCounter
@@ -32,7 +32,7 @@ export const useUpdateService = () => {
   onDone(({ data }) => {
     if(data?.updateService) {
       Notify.create({
-        message: 'Le service  mis à jour avec succès',
+        message: 'Le service est mis à jour avec succès',
         color: 'positive',
       })
     } else {
@@ -43,14 +43,7 @@ export const useUpdateService = () => {
     }
   });
 
-  function updateService(input: UpdateServiceInput) {
-    void mutate({
-      input,
-
-    });
-  }
-
-  function updateName(id: number, intitule: string) {
+  function updateService(id: number, intitule: string) {
     Dialog.create({
       cancel: 'Annuler',
       ok: 'Enregistrer',
@@ -74,8 +67,7 @@ export const useUpdateService = () => {
   }
 
   return {
-    loading,
+    loadingUpdate,
     updateService,
-    updateName,
   };
 };

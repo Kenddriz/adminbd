@@ -23,5 +23,9 @@ export const columns = [
     label: 'Salaire',
     field: 'salaire',
     sortable: true,
+  },
+  {
+    name: 'action',
+    label: 'Actions',
   }
 ]

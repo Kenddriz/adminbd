@@ -22,28 +22,21 @@ type User {
   username: String!
   password: String!
   avatar: String!
-  role: Int!
-  updatedAt: DateTime!
+}
+
+type Audit {
+  id: Int!
+  qui: String!
+  quoi: String!
+  quand: DateTime!
+  nouveauSalaire: Float!
+  ancienSalaire: Float!
 }
 
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
-
-type Category {
-  id: Int!
-  name: String!
-  slug: String!
-}
-
-type Audit {
-  id: Int!
-  quoi: String!
-  employe: Employe!
-  nouveauSalaire: Float!
-  ancienSalaire: Float!
-}
 
 type Synthese {
   id: Int!
@@ -58,30 +51,20 @@ type Query {
   employees: [Employe!]!
   users: [User!]!
   services: [Service!]!
-  service(id: Int!): Service!
-  categories: [Category!]!
-  findOneCategory(id: Int!): Category!
-  audit(id: Int!): Audit!
+  audits: [Audit!]!
   syntheses: [Synthese!]!
 }
 
 type Mutation {
-  createEmploye(input: CreateEmployeInput!): Employe!
-  updateEmploye(updateEmployeInput: UpdateEmployeInput!): Employe!
-  removeEmploye(id: Int!): Employe!
+  createEmployee(input: CreateEmployeInput!): Employe!
+  updateEmployee(input: UpdateEmployeInput!): Employe!
+  removeEmploye(id: Int!): Boolean!
   createUser(image: Upload, input: CreateUserInput!): User!
   updateUser(image: Upload, input: UpdateUserInput!): User!
   softRemoveUser(id: Int!): Boolean!
   createService(input: CreateServiceInput!): Service!
   updateService(input: UpdateServiceInput!): Service!
   removeService(id: Int!): Boolean!
-  createCategory(input: CreateCategoryInput!): Category!
-  updateCategory(input: UpdateCategoryInput!): Category!
-  removeCategory(id: Int!): Category!
-  removeAudit(id: Int!): Audit!
-  createSynthese(input: CreateSyntheseInput!): Synthese!
-  updateSynthese(updateSyntheseInput: UpdateSyntheseInput!): Synthese!
-  removeSynthese(id: Int!): Synthese!
 }
 
 input CreateEmployeInput {
@@ -116,32 +99,6 @@ input CreateServiceInput {
 }
 
 input UpdateServiceInput {
-  intitule: String
-  id: Int!
-}
-
-input CreateCategoryInput {
-  name: String!
-  slug: String!
-}
-
-input UpdateCategoryInput {
-  name: String
-  slug: String
-  id: Int!
-}
-
-input CreateSyntheseInput {
   intitule: String!
-  effectif: Int!
-  somSalaire: Int!
-  nombreSalDef: Int!
-}
-
-input UpdateSyntheseInput {
-  intitule: String
-  effectif: Int
-  somSalaire: Int
-  nombreSalDef: Int
   id: Int!
 }

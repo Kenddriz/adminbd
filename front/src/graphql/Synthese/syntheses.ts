@@ -1,0 +1,70 @@
+import {useLazyQuery, useResult} from '@vue/apollo-composable';
+import {gql} from '@apollo/client';
+import {SYNTHESE_FIELDS}  from 'src/graphql/Synthese/synthese.sdl';
+import { Synthese } from  '../types';
+
+type SynthesesData = {
+  syntheses: Synthese[];
+}
+const SYNTHESES = gql`
+    query Synthese{
+      syntheses {
+        ${SYNTHESE_FIELDS}
+        }
+    }
+`;
+const columns = [
+  {
+    name: 'id',
+    required: true,
+    label: 'ID',
+    align: 'left',
+    field: 'text',
+    sortable: true
+  },
+  {
+    name: 'intitule',
+    required: true,
+    label: 'intitule',
+    align: 'left',
+    field: 'text',
+    sortable: true
+  },
+  {
+    name: 'effectif',
+    required: true,
+    label: 'effectif',
+    align: 'left',
+    field: 'text',
+    sortable: true
+  },
+  {
+    name: 'somSalaire',
+    required: true,
+    label: 'somSalaire',
+    align: 'center',
+    field: 'text',
+    sortable: true
+  },
+  {
+    name: 'nombreSalDef',
+    align: 'center',
+    field: 'text',
+    sortable: true,
+    required: true,
+  }
+];
+export const useSyntheses = () => {
+
+  const { loading, result, load } = useLazyQuery<SynthesesData>(SYNTHESES);
+  const syntheses = useResult<SynthesesData | undefined, Synthese[], Synthese[]>(result, [], res => res.syntheses);
+  function loadData() {
+    void load(SYNTHESES);
+  }
+  return {
+    loading,
+    syntheses,
+    columns,
+    loadData
+  }
+}

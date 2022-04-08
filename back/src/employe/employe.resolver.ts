@@ -1,4 +1,12 @@
-import { Resolver, Query, Mutation, Args, Int, ResolveField, Root } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  Int,
+  ResolveField,
+  Root,
+} from '@nestjs/graphql';
 import { EmployeService } from './employe.service';
 import { Employe } from './employe.entity';
 import { CreateEmployeInput } from './types/input';
@@ -14,39 +22,34 @@ export class EmployeResolver {
   ) {}
 
   @Mutation(() => Employe)
-  async createEmploye(@Args('input') input: CreateEmployeInput) {
+  async createEmployee(@Args('input') input: CreateEmployeInput) {
     const { serviceId, ...res } = input;
-    const employe = new Employe();
-    employe.service = new Service();
-    employe.service.id = serviceId;
-    Object.assign(employe, res);
-    return this.employeService.save(employe);
+    const employee = new Employe();
+    employee.service = new Service();
+    employee.service.id = serviceId;
+    Object.assign(employee, res);
+    return this.employeService.save(employee);
   }
 
   @Mutation(() => Employe)
-  updateEmploye(
-    @Args('updateEmployeInput') updateEmployeInput: UpdateEmployeInput,
-  ) {
-    return this.employeService.update(
-      updateEmployeInput.id,
-      updateEmployeInput,
-    );
+  async updateEmployee(@Args('input') input: UpdateEmployeInput) {
+    const { id, ...res } = input;
+    const employee = await this.employeService.findOne(id);
+    Object.assign(employee, res);
+    return this.employeService.save(employee);
   }
 
-  @Mutation(() => Employe)
+  @Mutation(() => Boolean)
   removeEmploye(@Args('id', { type: () => Int }) id: number) {
     return this.employeService.remove(id);
   }
 
-  
   @Query(() => [Employe])
   employees() {
     return this.employeService.findAll();
   }
   @ResolveField(() => Service)
   service(@Root() employee: Employe) {
-    return this.serviceService.findOne(employee.serviceId)
-      ;  }
-
-
+    return this.serviceService.findOne(employee.serviceId);
+  }
 }

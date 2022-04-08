@@ -11,15 +11,15 @@
     :loading="loading"
     option-value="id"
     option-label="intitule"
+    placeholder="Nouveau service"
   >
     <template v-slot:before>
-      <q-btn :loading="loadingCreation" color="primary" icon="add" >
+      <q-btn :loading="loadingCreation" color="teal" icon="add" >
         <q-popup-edit
          :model-value="input.intitule"
-        class="bg-cyan-8 text-white"
+         auto-save
         >
         <q-input
-          dark color="white"
           v-model="input.intitule"
           dense
           @keyup.enter="submitCreation"
@@ -28,28 +28,40 @@
       </q-btn>
     </template>
     <template v-slot:after>
-      <q-btn color="primary" icon="edit" />
+      <q-btn
+        :loading="loadingUpdate"
+        :disable="!selected"
+        @click="update()"
+        color="teal"
+        icon="edit"
+      />
     </template>
   </q-select>
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from 'vue';
-import {useServices} from 'src/graphql/service/services';
-import {useCreateService} from 'src/graphql/service/create.service';
+import { defineComponent, ref, watch } from 'vue';
+import { useCreateService } from 'src/graphql/service/create.service';
+import {useUpdateService} from "src/graphql/service/update.service";
 
 export default defineComponent({
-
+  props: ['services', 'loading'],
   name: 'Service',
-  setup() {
-    const {} = useServices();
+  setup(props) {
+    const selected = ref<any>(null);
+    watch(() => props.services, services => {
+      selected.value = services.length > 0 ? 1 : null;
+    });
+    const { loadingUpdate, updateService } = useUpdateService();
+    function update() {
+      const { id, intitule } = props.services.find((s: any) => s.id === selected.value);
+      updateService(id, intitule);
+    }
     return {
-      // spreed
-      // Destructuration
-      ...useServices(),
-      selected: ref(1),
-      ...useCreateService()
-  // We need an a spreed when
+      selected,
+      ...useCreateService(),
+      update,
+      loadingUpdate
     }
   }
 })

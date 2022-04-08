@@ -52,13 +52,13 @@ export const useCreateService = () => {
   onDone(({ data }) => {
     if (data?.createService) {
       Notify.create({
-        message: 'success',
+        message: 'Service crée avec succès',
         color: 'info'
       })
     }
     else {
       Notify.create({
-        message: 'failed',
+        message: 'Echec de création de service. Réessayez plus tard',
         color: 'info'
       })
     }

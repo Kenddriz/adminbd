@@ -1,10 +1,5 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import {
-  Column,
-  DeleteDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
 @Entity({ name: 'users' })
@@ -28,12 +23,4 @@ export class User {
   @Field(() => String)
   @Column({ type: 'varchar', length: 21, default: '' })
   avatar: string;
-
-  @Field(() => Int)
-  @Column({ type: 'int', width: 1, default: 0 })
-  role: number;
-
-  @Field()
-  @DeleteDateColumn({ type: 'datetime', name: 'created_at' })
-  updatedAt: Date;
 }
