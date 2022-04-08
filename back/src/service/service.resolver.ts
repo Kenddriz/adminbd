@@ -1,18 +1,24 @@
-import { Resolver, Query, Mutation, Args, Int, ResolveField, Root } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  Int,
+  ResolveField,
+  Root,
+} from '@nestjs/graphql';
 import { ServiceService } from './service.service';
 import { Service } from './service.entity';
-<<<<<<< HEAD
 import { CreateServiceInput, UpdateServiceInput } from './types/input';
-=======
-import { CreateServiceInput } from './types/input';
-import { UpdateServiceInput } from './types/update-service.input';
 import { Employe } from '../employe/employe.entity';
->>>>>>> 5bda9ac662888e2f38d49438d44c5114fb0a973a
+import { EmployeService } from '../employe/employe.service';
 
 @Resolver(() => Service)
 export class ServiceResolver {
-  employeService: any;
-  constructor(private serviceService: ServiceService) {}
+  constructor(
+    private serviceService: ServiceService,
+    private employeeService: EmployeService,
+  ) {}
 
   @Mutation(() => Service)
   async createService(@Args('input') input: CreateServiceInput) {
@@ -20,15 +26,11 @@ export class ServiceResolver {
     Object.assign(service, input);
     return this.serviceService.save(service);
   }
-<<<<<<< HEAD
 
   @Query(() => [Service])
   services() {
     return this.serviceService.findAll();
   }
-
-=======
->>>>>>> 5bda9ac662888e2f38d49438d44c5114fb0a973a
   @Mutation(() => Service)
   async updateService(@Args('input') input: UpdateServiceInput) {
     const { id, ...res } = input;
@@ -44,18 +46,8 @@ export class ServiceResolver {
     return this.serviceService.remove(id);
   }
 
-  @Query(() => [Service])
-  services() {
-    return this.serviceService.findAll();
-  }
-
-  @Query(() => Service, { name: 'service' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.serviceService.findOne(id);
-  }
-
   @ResolveField(() => [Employe])
-  employes(@Root() service: Service){
-    return this.employeService.findEmployesByService(service.id);
-        }
+  employes(@Root() service: Service) {
+    return this.employeeService.findEmployesByService(service.id);
+  }
 }
