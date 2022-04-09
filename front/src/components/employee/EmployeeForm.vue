@@ -1,7 +1,7 @@
 <template>
     <q-card>
       <q-card-section class="q-pb-none text-h5">
-        {{ item ? 'Mettre à jour l\'employé.' : 'Créer un employé.' }}
+        {{ item ? 'Mettre à jour l\'employé' : 'Créer un employé' }}
       </q-card-section>
       <q-card-section class="q-pt-none">
         <q-form @submit="$emit('submit', input)">

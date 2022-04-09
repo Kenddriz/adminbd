@@ -14,7 +14,13 @@
       <Service :services="services" :loading="loading" />
     </template>
     <template v-slot:top-right>
-      <q-btn @click="openDialog()" label="Nouvel employé" icon="add" class="q-mx-md" />
+      <q-btn
+        :disable="services.length === 0"
+        @click="openDialog()"
+        label="Nouvel employé"
+        icon="add"
+        class="q-mx-md"
+      />
       <q-input outlined dense debounce="300" v-model="filter" placeholder="Search">
         <template v-slot:append>
           <q-icon name="search" />
