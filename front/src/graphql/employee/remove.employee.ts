@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 import {useMutation} from '@vue/apollo-composable';
-import {MutationRemoveEmployeArgs} from 'src/graphql/types';
+import {MutationRemoveEmployeeArgs} from 'src/graphql/types';
 import {Dialog} from 'quasar';
 
 type RemoveEmployeeData = {
@@ -16,7 +16,7 @@ const REMOVE_EMPLOYEE = gql`
 export const useRemoveEmployee = () => {
   const { loading: loadingRemove, mutate } = useMutation<
     RemoveEmployeeData,
-    MutationRemoveEmployeArgs
+    MutationRemoveEmployeeArgs
     >(REMOVE_EMPLOYEE);
   function removeEmployee(id: number) {
     Dialog.create({

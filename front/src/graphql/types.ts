@@ -55,7 +55,7 @@ export type Mutation = {
   createEmployee: Employe;
   createService: Service;
   createUser: User;
-  removeEmploye: Scalars['Boolean'];
+  removeEmployee: Scalars['Boolean'];
   removeService: Scalars['Boolean'];
   softRemoveUser: Scalars['Boolean'];
   updateEmployee: Employe;
@@ -80,7 +80,7 @@ export type MutationCreateUserArgs = {
 };
 
 
-export type MutationRemoveEmployeArgs = {
+export type MutationRemoveEmployeeArgs = {
   id: Scalars['Int'];
 };
 

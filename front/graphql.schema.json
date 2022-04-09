@@ -488,7 +488,7 @@
             "deprecationReason": null
           },
           {
-            "name": "removeEmploye",
+            "name": "removeEmployee",
             "description": null,
             "args": [
               {

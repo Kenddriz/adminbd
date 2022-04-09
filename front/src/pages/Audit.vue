@@ -15,16 +15,13 @@
 
 
 <script lang="ts">
-  import {defineComponent, onMounted, ref} from 'vue';
+  import {defineComponent, ref} from 'vue';
 import {useAudits} from 'src/graphql/audit/audits';
 
 export default defineComponent({
   name: 'Synthesis',
   setup() {
-    const { loading, loadData, columns, audits } = useAudits();
-    onMounted(() => {
-      loadData();
-    })
+    const { loading, columns, audits } = useAudits();
     return {
       filter: ref(''),
       columns,

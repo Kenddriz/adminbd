@@ -1,5 +1,5 @@
 import {Audit} from 'src/graphql/types';
-import {useLazyQuery, useResult} from '@vue/apollo-composable';
+import {useQuery, useResult} from '@vue/apollo-composable';
 import {gql} from '@apollo/client';
 
 type AuditsData = {
@@ -57,15 +57,11 @@ const columns = [
   }
 ];
 export const useAudits = () => {
-  const { loading, result, load } = useLazyQuery<AuditsData>(AUDITS);
+  const { loading, result } = useQuery<AuditsData>(AUDITS, {}, { fetchPolicy: 'network-only' });
   const audits = useResult<AuditsData | undefined, Audit[], Audit[]>(result, [], res => res.audits);
-  function loadData() {
-    void load(AUDITS);
-  }
   return {
     audits,
     columns,
     loading,
-    loadData
   }
 }
