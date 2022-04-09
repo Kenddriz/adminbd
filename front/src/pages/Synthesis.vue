@@ -11,6 +11,7 @@
     :pagination-label="paginationLabel"
     :loading="loading"
     class="q-ma-md"
+    no-data-label="Aucune synthèse trouvée"
   >
     <template v-slot:top-right>
       <q-input borderless dense debounce="300" v-model="filter" placeholder="Chercher">

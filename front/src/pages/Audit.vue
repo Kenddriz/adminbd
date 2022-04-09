@@ -9,6 +9,7 @@
     bordered
     rows-per-page-label="Audits par page"
     :pagination-label="paginationLabel"
+    no-data-label="Aucun audit trouvé"
   />
 </template>
 
