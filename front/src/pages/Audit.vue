@@ -7,6 +7,8 @@
     row-key="id"
     flat
     bordered
+    rows-per-page-label="Audits par page"
+    :pagination-label="paginationLabel"
   />
 </template>
 
@@ -27,6 +29,7 @@ export default defineComponent({
       columns,
       loading,
       audits,
+      paginationLabel: (first: number, end: number, total: number) => `${first} - ${end} de ${total}`,
     }
   }
 })
