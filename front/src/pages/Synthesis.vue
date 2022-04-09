@@ -4,7 +4,7 @@
     title="Toutes synthèses"
     :rows="syntheses"
     :columns="columns"
-    row-key="id"
+    row-key="name"
     :filter="filter"
     hide-header
     rows-per-page-label="Synthèses par page"

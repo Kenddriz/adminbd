@@ -3,7 +3,7 @@
     :rows="employees"
     :columns="columns"
     row-key="name"
-    :filter="filter"
+    v-model:filter="filter"
     class="q-ma-md"
     square
     no-data-label="Aucun employé trouvé"

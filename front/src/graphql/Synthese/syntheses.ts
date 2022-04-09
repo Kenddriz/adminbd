@@ -19,7 +19,7 @@ const columns = [
     required: true,
     label: 'ID',
     align: 'left',
-    field: 'text',
+    field: 'id',
     sortable: true
   },
   {
@@ -27,7 +27,7 @@ const columns = [
     required: true,
     label: 'intitule',
     align: 'left',
-    field: 'text',
+    field: 'intitule',
     sortable: true
   },
   {
@@ -43,13 +43,13 @@ const columns = [
     required: true,
     label: 'somSalaire',
     align: 'center',
-    field: 'text',
+    field: 'somSalaire',
     sortable: true
   },
   {
     name: 'nombreSalDef',
     align: 'center',
-    field: 'text',
+    field: 'nombreSalDef',
     sortable: true,
     required: true,
   }
