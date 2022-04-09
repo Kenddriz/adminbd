@@ -24,11 +24,17 @@ export class EmployeResolver {
   @Mutation(() => Employe)
   async createEmployee(@Args('input') input: CreateEmployeInput) {
     const { serviceId, ...res } = input;
-    const employee = new Employe();
+    let employee = new Employe();
     employee.service = new Service();
     employee.service.id = serviceId;
     Object.assign(employee, res);
-    return this.employeService.save(employee);
+    employee = await this.employeService.save(employee);
+    return new Promise((resolve) => {
+      setTimeout(async () => {
+        employee = await this.employeService.findOne(employee.id);
+        resolve(employee);
+      }, 100);
+    });
   }
 
   @Mutation(() => Employe)
@@ -40,7 +46,7 @@ export class EmployeResolver {
   }
 
   @Mutation(() => Boolean)
-  removeEmploye(@Args('id', { type: () => Int }) id: number) {
+  removeEmployee(@Args('id', { type: () => Int }) id: number) {
     return this.employeService.remove(id);
   }
 

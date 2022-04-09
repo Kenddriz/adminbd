@@ -11,7 +11,7 @@
     :loading="loading"
     option-value="id"
     option-label="intitule"
-    placeholder="Nouveau service"
+    label="services"
   >
     <template v-slot:before>
       <q-btn :loading="loadingCreation" color="teal" icon="add" >

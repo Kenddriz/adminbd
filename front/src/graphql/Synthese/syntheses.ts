@@ -1,4 +1,4 @@
-import {useLazyQuery, useResult} from '@vue/apollo-composable';
+import {useQuery, useResult} from '@vue/apollo-composable';
 import {gql} from '@apollo/client';
 import {SYNTHESE_FIELDS}  from 'src/graphql/Synthese/synthese.sdl';
 import { Synthese } from  '../types';
@@ -56,15 +56,11 @@ const columns = [
 ];
 export const useSyntheses = () => {
 
-  const { loading, result, load } = useLazyQuery<SynthesesData>(SYNTHESES);
+  const { loading, result } = useQuery<SynthesesData>(SYNTHESES, {}, { fetchPolicy: 'network-only' });
   const syntheses = useResult<SynthesesData | undefined, Synthese[], Synthese[]>(result, [], res => res.syntheses);
-  function loadData() {
-    void load(SYNTHESES);
-  }
   return {
     loading,
     syntheses,
     columns,
-    loadData
   }
 }

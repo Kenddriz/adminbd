@@ -69,7 +69,7 @@
 import {defineComponent, ref} from 'vue';
 import {useServices} from 'src/graphql/service/services';
 import UserForm from 'components/service/Service.vue';
-import {useSoftRemoveService} from 'src/graphql/service/soft.remove.service';
+import {useSoftRemoveService} from 'src/graphql/service/remove.service';
 import {useUpdateService} from 'src/graphql/service/update.service';
 
 

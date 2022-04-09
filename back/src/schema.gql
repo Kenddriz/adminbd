@@ -58,7 +58,7 @@ type Query {
 type Mutation {
   createEmployee(input: CreateEmployeInput!): Employe!
   updateEmployee(input: UpdateEmployeInput!): Employe!
-  removeEmploye(id: Int!): Boolean!
+  removeEmployee(id: Int!): Boolean!
   createUser(image: Upload, input: CreateUserInput!): User!
   updateUser(image: Upload, input: UpdateUserInput!): User!
   softRemoveUser(id: Int!): Boolean!

@@ -36,7 +36,7 @@ export const useCreateEmployee = (callback: () => void) => {
   onDone(({ data }) => {
     if(data?.createEmployee) {
       Notify.create({
-        message: 'Employé créé avec succès',
+        message: 'Employé crée avec succès',
         color: 'teal',
       });
       callback();

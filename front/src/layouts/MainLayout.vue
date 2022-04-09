@@ -30,10 +30,10 @@
       :width="280"
     >
       <q-scroll-area class="fit">
-        <q-list padding class="text-white-8">
+        <q-list padding>
           <q-item
             exact
-            exact-active-class="text-primary"
+            exact-active-class="bg-warning"
             class="GNL__drawer-item"
             v-ripple v-for="(link, index) in menu"
             :to="link.to" :key="index"

@@ -9,7 +9,7 @@ type RemoveEmployeeData = {
 
 const REMOVE_EMPLOYEE = gql`
     mutation RemoveEmployee($id: Int!) {
-      removeEmploye(id: $id)
+      removeEmployee(id: $id)
     }
 `;
 

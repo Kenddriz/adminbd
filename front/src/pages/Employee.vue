@@ -48,7 +48,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref, defineAsyncComponent, reactive, onMounted } from 'vue';
+import {defineComponent, ref, defineAsyncComponent, reactive } from 'vue';
 import Service from 'components/service/Service.vue';
 import {useEmployees} from 'src/graphql/employee/employees';
 import {columns} from 'src/graphql/employee/employee';
@@ -72,7 +72,6 @@ export default defineComponent({
       dialog.item = item;
       dialog.show = true;
     }
-    const { loadEmployees, employees, loadData } = useEmployees();
     const { createEmployee, createLoading } = useCreateEmployee(() => {
       dialog.item = null;
       dialog.show = false;
@@ -85,13 +84,9 @@ export default defineComponent({
       if(dialog.item) updateEmployee({ id: dialog.item.id, ...input });
       else createEmployee(input);
     }
-    onMounted(() => {
-      loadData();
-    })
     return {
       filter: ref(''),
-      loadEmployees,
-      employees,
+      ...useEmployees(),
       columns,
       dialog,
       openDialog,

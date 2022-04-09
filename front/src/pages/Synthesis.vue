@@ -47,14 +47,14 @@
             </q-item-section>
           </q-item>
 
-          <q-item>
+          <!--<q-item>
             <q-item-section side>
               <q-item-label>Salaire défini</q-item-label>
               <q-item-label caption>
                 {{ props.row.nombreSalDef }}
               </q-item-label>
             </q-item-section>
-          </q-item>
+          </q-item>-->
         </q-list>
       </q-card>
     </template>
@@ -63,16 +63,13 @@
 
 
 <script lang="ts">
-  import {defineComponent, onMounted, ref} from 'vue';
-import {useSyntheses} from '../graphql/Synthese/syntheses';
+  import {defineComponent, ref} from 'vue';
+  import {useSyntheses} from '../graphql/Synthese/syntheses';
 
 export default defineComponent({
   name: 'Synthesis',
   setup() {
-    const { loadData, columns, loading, syntheses } = useSyntheses();
-    onMounted(() => {
-      loadData();
-    })
+    const {  columns, loading, syntheses } = useSyntheses();
     return {
       filter: ref(''),
       paginationLabel: (first: number, end: number, total: number) => `${first} - ${end} de ${total}`,
