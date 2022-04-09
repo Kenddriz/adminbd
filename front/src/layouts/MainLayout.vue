@@ -13,7 +13,7 @@
         />
 
         <q-toolbar-title v-if="$q.screen.gt.xs" shrink class="row items-center no-wrap">
-          Administrateur
+          Administration de base de données
         </q-toolbar-title>
 
         <q-space />
@@ -76,7 +76,7 @@ export default {
       leftDrawerOpen,
       search,
       menu: [
-        { icon: 'supervisor_account', label: 'Utilisateurs', to: '/users' },
+        //{ icon: 'supervisor_account', label: 'Utilisateurs', to: '/users' },
         { icon: 'work', label: 'Employés', to: '/employee' },
         { icon: 'view_in_ar', label: 'Synthèses', to: '/synthesis' },
         { icon: 'perm_contact_calendar', label: 'Audits', to: '/audits' },
